@@ -1,0 +1,46 @@
+describe('Filter function',()=>{
+/*Our first friend is describe, a Jest method for containing one or more related
+ tests. Every time you start writing a new suite of tests for a functionality wrap it in a describe block*/
+    
+ //Next up we're going to meet another function called test which is the actual test block:
+ test("it should filter by a search term (link)",() =>{
+     /*At this point we're ready to write the test.
+      Remember, testing is a matter of inputs, functions,
+      and expected outputs. First let's define a simple input,
+      an array of objects:*/ 
+      
+        const input = [
+            { id: 1, url: "https://www.url1.dev" },
+            { id: 2, url: "https://www.url2.dev" },
+            { id: 3, url: "https://www.link3.dev" }
+          ];
+
+
+        /*Next up we're going to define the expected result.
+         As per spec the function under test should leave out the objects
+          whose url property does not match the given search term.
+          We can expect for example an array with a single object,
+           given "link" as the search term:*/
+
+        const output =[{id: 3, url: "https://www.link3.dev"}];
+
+
+        /*Now we're ready to write the actual test. We'll use expect,
+         and a Jest matcher for checking if our fictitious
+         (for now) function returns the expected result when called.
+          Here's the test:*/
+        expect(filterByTerm(input, "link")).toEqual(output);
+    })
+});
+
+
+const filterByTerm = (inputArr,searchTerms) =>{
+
+    /*Here's how it works: for each element of the input array
+     we check the "url" property, matching it against a regular
+      expression with the match method. Here's the complete code:
+    */
+    return inputArr.filter(function(arrayElement){
+        return arrayElement.url.match(searchTerms);
+    })
+}

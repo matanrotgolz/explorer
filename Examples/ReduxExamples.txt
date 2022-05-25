@@ -1,0 +1,62 @@
+Rdux is based on external library. We can download the library from npm.
+
+To create a store we need to export the object from the Redux library ( import {CreateStore} from Redux)).
+CreateStore will recive one argument , the reducer funtion.
+
+example: 
+// Import createStore here
+import {createStore} from 'redux';
+
+const initialState = 0;
+const countReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'increment':
+      return state + 1;
+    default:
+      return state;
+  }
+}
+
+// Create the store here
+const store = createStore(countReducer);
+
+
+Remember the object that is returned from the CreateStore contains a few method that
+interact with the actions that is been provided to the reducer as well as the reducer itself.
+
+The most common method is store.dispatch(action).
+That method is indicating  to the store that we wish to change the current state.
+The only argumnet this method can get is the action object. 
+
+example: 
+
+const action  = {type: "action"};
+store.dispatch(action);
+
+Every time that store.dispatch is been called,  the store reducer will be executed with the same action.    
+
+example: 
+
+import { createStore } from 'redux';
+ 
+const initialState = 'on';
+const lightSwitchReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'toggle':
+      return state === 'on' ? 'off' : 'on';
+    default:
+      return state;
+  }
+}
+ 
+const store = createStore(lightSwitchReducer);
+ 
+console.log(store.getState()); // Prints 'on'
+ 
+store.dispatch({ type: 'toggle' }); 
+console.log(store.getState()); // Prints 'off'
+ 
+store.dispatch({ type: 'toggle' });
+console.log(store.getState()); // Prints 'on'
+
+In this example you can see another method: store.getState() which returns the current state of the store
