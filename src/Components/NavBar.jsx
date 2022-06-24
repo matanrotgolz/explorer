@@ -10,7 +10,6 @@ import Switch from './Swtich';
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Particles from './Particles';
 
 const NavBarContainer = styled.div `
   display: flex;
@@ -101,8 +100,8 @@ export default function MenuAppBar(props) {
   const [mode,SetStatus] =useState('notFetched');
   const [icon,SetIcon] = useState(null);
   const slidBarColor = props.color === '#282c34'? '#282c34'  : '#ffffff' ;
-  const[theme,SetTheme] = useState(null);
-  const [currentColor,SetCurrentColor] = useState(props.color);
+  const [theme,SetTheme] = useState(null);
+  const [currentColor,SetCurrentColor] = useState(null);
   const [currentButtonColor,SetCurrentButtonColor] = useState(props.color === 'dark' ? 'white' : '#282c34');
   const [backgroundColor,setBackgroundColor] = useState(null);
   const [textColor,setTextColor] = useState(props.color === '#282c34' ? 'white' : '#282c34')
@@ -116,10 +115,10 @@ export default function MenuAppBar(props) {
       else{
         SetTheme('light');
       }
+     ReactDOM.render(<React.StrictMode><App color = {theme} /></React.StrictMode>,document.getElementById('root'));
   };
 
  const  ButtonFunction = () =>{
-   console.log('I am the button fucntion i have been activated');
   if(theme === 'dark'){
    SetCurrentColor('light');
    SetCurrentButtonColor('#282c34');
@@ -143,10 +142,10 @@ useEffect(()=>{
 
 useEffect(()=>{
   //the initial status of value is false
+  console.log(value,currentColor);
   if(currentColor === null){
     setValue(value);
     ButtonFunction();
-
   }
 ButtonFunction();
   console.log('button been called');
@@ -195,9 +194,10 @@ const WeatherFunction = () =>{
           text: <LinkedNavBAr style ={{color:textColor}}>Contact</LinkedNavBAr>,
           link:'/Contact'
         },
+        /*
         {
           text:<Switch isOn={value} onColor={currentButtonColor} handleToggle={() => {setValue(!value);}}/>
-        }
+        }*/
       ],
       logo: {
         text: <WeatherAPi><Temp style ={{color:textColor}}>{weather} </Temp><img src={icon} alt = ""></img></WeatherAPi>

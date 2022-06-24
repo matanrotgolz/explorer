@@ -73,7 +73,7 @@ export default function Padrticles(props){
                 enable: true,
                 value_area: 800,
               },
-              value: 85,
+              value: 40,
             },
             opacity: {
               value: 0.5,
